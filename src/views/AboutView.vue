@@ -1,5 +1,5 @@
 <template>
-  <div class="about px-10 dark:bg-black bg-white py-10 dark:text-white">
+  <div class="about px-10">
     <h1>This is an about page</h1>
     <MarkMode />
   </div>

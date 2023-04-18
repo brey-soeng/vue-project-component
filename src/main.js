@@ -1,11 +1,10 @@
-import { createApp } from 'vue'
+import { app } from '@/plugin/main-app'
 import { createPinia } from 'pinia'
-
-import App from './App.vue'
 import router from './router'
 import i18n from './lang'
 import '@/styles/style.css'
-const app = createApp(App)
+
+import '@/plugin/global-components'
 app.use(createPinia())
 app.use(router)
 app.use(i18n)

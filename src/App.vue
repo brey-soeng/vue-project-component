@@ -5,9 +5,10 @@ import Trans from '@/lang/translation'
 <template>
   <header>
     <div class="wrapper">
-      <nav class="flex">
+      <nav class="flex gap-4">
         <RouterLink :to="Trans.i18nRoute({ name: 'Home' })">{{ $t('header.home') }}</RouterLink>
         <RouterLink :to="Trans.i18nRoute({ name: 'About' })">{{ $t('header.about') }}</RouterLink>
+        <RouterLink :to="Trans.i18nRoute({ name: 'drawer' })">{{ $t('header.drawer') }}</RouterLink>
       </nav>
     </div>
   </header>

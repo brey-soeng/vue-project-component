@@ -1,7 +1,8 @@
 export default {
   header: {
     home: 'Home',
-    about: 'About'
+    about: 'About',
+    drawer: 'Drawer'
   },
   locale: {
     en: 'English',

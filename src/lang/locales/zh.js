@@ -1,7 +1,8 @@
 export default {
   header: {
     home: 'jia',
-    about: 'ziji'
+    about: 'ziji',
+    drawer: 'drawer'
   },
   locale: {
     en: 'Yinwen',

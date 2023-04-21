@@ -1,7 +1,8 @@
 export default {
   header: {
     home: 'ទំព័រដើម',
-    about: 'អំពី'
+    about: 'អំពី',
+    drawer: 'ស្លាយ'
   },
   locale: {
     en: 'អង់គ្លេស',

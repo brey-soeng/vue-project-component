@@ -950,8 +950,9 @@
       harum tenetur impedit in quibusdam tempora?
     </p>
   </div>
-  <back-to-top />
+  <BacktoTop />
 </template>
 <script setup>
 import MarkMode from '@/components/DarkMode.vue'
+import BacktoTop from '@/components/BackToTop.vue'
 </script>

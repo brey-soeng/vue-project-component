@@ -6,6 +6,9 @@ import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 
 export default defineConfig({
   base: '/tvc-components/',
+  server: {
+    port: 3000
+  },
   plugins: [
     vue(),
     VueI18nPlugin({

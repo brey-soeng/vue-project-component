@@ -1,1 +1,0 @@
-const n={header:{home:r=>{const{normalize:e}=r;return e(["jia"])},about:r=>{const{normalize:e}=r;return e(["ziji"])},drawer:r=>{const{normalize:e}=r;return e(["drawer"])}},locale:{en:r=>{const{normalize:e}=r;return e(["Yinwen"])},kh:r=>{const{normalize:e}=r;return e(["Jianpuzhai"])},zh:r=>{const{normalize:e}=r;return e(["Zhong wen"])}}};export{n as default};

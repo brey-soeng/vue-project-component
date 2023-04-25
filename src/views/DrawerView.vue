@@ -11,6 +11,7 @@
     @close="open = false"
     isOverlay
     stickyHeader
+    width="50"
     stickyFooter
   >
     <p>

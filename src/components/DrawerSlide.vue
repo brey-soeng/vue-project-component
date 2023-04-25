@@ -21,10 +21,10 @@
             <TransitionChild
               as="template"
               enter="transform transition ease-in-out duration-500 sm:duration-700"
-              :enter-from="enterDirectionFrom"
-              :enter-to="enterDirectionTo"
-              :leave-from="leaveDirectionFrom"
-              :leave-to="leaveDirectionTo"
+              :enter-from="leaveEnterDirectionFromTo"
+              :enter-to="enterLeaveDirectionFromTo"
+              :leave-from="enterLeaveDirectionFromTo"
+              :leave-to="leaveEnterDirectionFromTo"
               leave="transform transition ease-in-out duration-500 sm:duration-700"
             >
               <DialogPanel class="pointer-events-auto relative" :style="maxWidthPanel">
@@ -173,82 +173,46 @@ watch(
   }
 )
 
-const leaveDirectionFrom = computed(() => {
-  let leaveFrom = ''
+const enterLeaveDirectionFromTo = computed(() => {
+  let enterLeaveFromTo = ''
   switch (props.direction) {
     case 'rtl':
-      leaveFrom = 'translate-x-0'
+      enterLeaveFromTo = 'translate-x-0'
       break
     case 'ltr':
-      leaveFrom = 'translate-x-0'
+      enterLeaveFromTo = 'translate-x-0'
       break
     case 'ttb':
-      leaveFrom = 'translate-y-0'
+      enterLeaveFromTo = 'translate-y-0'
       break
     case 'btt':
-      leaveFrom = 'translate-y-0'
+      enterLeaveFromTo = 'translate-y-0'
       break
     default:
   }
-  return leaveFrom
+  return enterLeaveFromTo
 })
-const enterDirectionTo = computed(() => {
-  let enterTo = ''
+
+const leaveEnterDirectionFromTo = computed(() => {
+  let enterLeaveFromTo = ''
   switch (props.direction) {
     case 'rtl':
-      enterTo = 'translate-x-0'
+      enterLeaveFromTo = 'translate-x-full'
       break
     case 'ltr':
-      enterTo = 'translate-x-0'
+      enterLeaveFromTo = '-translate-x-full'
       break
     case 'ttb':
-      enterTo = 'translate-y-0'
+      enterLeaveFromTo = '-translate-y-full'
       break
     case 'btt':
-      enterTo = 'translate-y-0'
+      enterLeaveFromTo = 'translate-y-full'
       break
     default:
   }
-  return enterTo
+  return enterLeaveFromTo
 })
-const leaveDirectionTo = computed(() => {
-  let leaveTo = ''
-  switch (props.direction) {
-    case 'rtl':
-      leaveTo = 'translate-x-full'
-      break
-    case 'ltr':
-      leaveTo = '-translate-x-full'
-      break
-    case 'ttb':
-      leaveTo = '-translate-y-full'
-      break
-    case 'btt':
-      leaveTo = 'translate-y-full'
-      break
-    default:
-  }
-  return leaveTo
-})
-const enterDirectionFrom = computed(() => {
-  let enterFrom = ''
-  switch (props.direction) {
-    case 'rtl':
-      enterFrom = 'translate-x-full'
-      break
-    case 'ltr':
-      enterFrom = '-translate-x-full'
-      break
-    case 'ttb':
-      enterFrom = '-translate-y-full'
-      break
-    case 'btt':
-      enterFrom = 'translate-y-full'
-      break
-    default:
-  }
-  return enterFrom
-})
+
 const addClass = computed(() => {
   let direction = []
   switch (props.direction) {

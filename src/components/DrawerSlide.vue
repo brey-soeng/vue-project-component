@@ -38,15 +38,17 @@
                   leave-from="opacity-100"
                   leave-to="opacity-0"
                 >
-                  <div class="absolute left-0 top-0 -ml-8 flex pr-2 pt-4 sm:-ml-10 sm:pr-4">
-                    <button
-                      type="button"
-                      class="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-gray-200 active:text-sky-400"
-                      @click="handleClose"
-                    >
-                      <span class="sr-only">Close panel</span>
-                      <XMarkIcon class="h-6 w-6" aria-hidden="true" />
-                    </button>
+                  <div class="absolute" :class="showCloseOutside">
+                    <slot name="closeOutside">
+                      <button
+                        type="button"
+                        class="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-gray-200 active:text-sky-400"
+                        @click="handleClose"
+                      >
+                        <span class="sr-only">Close panel</span>
+                        <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+                      </button>
+                    </slot>
                   </div>
                 </TransitionChild>
                 <!-- close buttom outside -->
@@ -172,6 +174,26 @@ watch(
     show.value = value
   }
 )
+
+const showCloseOutside = computed(() => {
+  let addClass = ''
+  switch (props.direction) {
+    case 'rtl':
+      addClass = 'left-0 top-0 -mr-8 flex pr-2 pt-4 sm:-ml-8 sm:pr-4'
+      break
+    case 'ltr':
+      addClass = 'right-0 top-0 -mr-12 flex pr-2 pt-4 sm:-ml-8 sm:pr-4'
+      break
+    case 'ttb':
+      addClass = 'bottom-0 left-0 -mb-12 flex pr-2 pb-4 sm:-mb-12 sm:ml-3'
+      break
+    case 'btt':
+      addClass = 'top-0 left-0 -mt-8 flex pr-2 pb-4 sm:-mt-8 sm:ml-3'
+      break
+    default:
+  }
+  return addClass
+})
 
 const enterLeaveDirectionFromTo = computed(() => {
   let enterLeaveFromTo = ''

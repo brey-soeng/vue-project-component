@@ -7,11 +7,10 @@
   </button>
   <drawer-slide
     :open="open"
-    title="drawer title"
     @close="open = false"
+    title="Drawer title"
     isOverlay
     stickyHeader
-    width="50"
     stickyFooter
   >
     <p>

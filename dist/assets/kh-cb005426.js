@@ -1,1 +1,0 @@
-const n={header:{home:r=>{const{normalize:e}=r;return e(["ទំព័រដើម"])},about:r=>{const{normalize:e}=r;return e(["អំពី"])},drawer:r=>{const{normalize:e}=r;return e(["ស្លាយ"])}},locale:{en:r=>{const{normalize:e}=r;return e(["អង់គ្លេស"])},kh:r=>{const{normalize:e}=r;return e(["ភាសាខ្មែរ"])},zh:r=>{const{normalize:e}=r;return e(["ភាសាចិន"])}}};export{n as default};

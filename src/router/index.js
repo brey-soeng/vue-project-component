@@ -11,21 +11,26 @@ const router = createRouter({
         {
           path: '',
           name: 'Home',
-
+          meta: { title: 'home', current: false, hidden: false, permission: '', icon: '' },
           component: () => import('../views/HomeView.vue')
         },
         {
           path: 'about',
           name: 'About',
-          // route level code-splitting
-          // this generates a separate chunk (About.[hash].js) for this route
-          // which is lazy-loaded when the route is visited.
+          meta: { title: 'about', current: false, hidden: false, permission: '', icon: '' },
           component: () => import('../views/AboutView.vue')
         },
         {
           path: 'drawer',
           name: 'drawer',
+          meta: { title: 'drawer', current: false, hidden: false, permission: '', icon: '' },
           component: () => import('../views/DrawerView.vue')
+        },
+        {
+          path: 'menu',
+          name: 'menu',
+          meta: { title: 'menu', current: false, hidden: false, permission: '', icon: '' },
+          component: () => import('../views/MenuView.vue')
         }
       ]
     }

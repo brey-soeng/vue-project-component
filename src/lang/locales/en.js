@@ -2,7 +2,8 @@ export default {
   header: {
     home: 'Home',
     about: 'About',
-    drawer: 'Drawer'
+    drawer: 'Drawer',
+    menu: 'Menu'
   },
   locale: {
     en: 'English',

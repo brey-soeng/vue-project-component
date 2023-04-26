@@ -46,7 +46,7 @@
                         @click="handleClose"
                       >
                         <span class="sr-only">Close panel</span>
-                        <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+                        <svg-icon name="Mark" />
                       </button>
                     </slot>
                   </div>
@@ -77,7 +77,7 @@
                                 @click="handleClose"
                               >
                                 <span class="sr-only">Close panel</span>
-                                <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+                                <svg-icon name="Mark" />
                               </button>
                             </slot>
                           </div>
@@ -119,7 +119,6 @@
 </template>
 <script setup>
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { XMarkIcon } from '@heroicons/vue/24/outline'
 import { computed, ref, watch } from 'vue'
 const props = defineProps({
   title: {

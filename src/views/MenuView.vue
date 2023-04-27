@@ -12,102 +12,102 @@ const navigation = ref([
     meta: { title: 'Dashboard', current: false, icon: 'Home' }
   },
   {
-    name: 'Teams',
+    name: 'School',
     path: '#',
-    meta: { title: 'home', current: false, icon: 'Home' },
+    meta: { title: 'Academic', current: false, icon: 'Academic' },
     children: [
       {
         name: 'Engineering',
         path: '#',
-        meta: { title: 'Engineering', current: false, icon: 'Home' },
+        meta: { title: 'Engineering', current: false, icon: '' },
         children: [
           {
-            name: 'dddd',
+            name: 'human',
             path: '#',
-            meta: { title: 'ddd', current: false, icon: 'Home' },
+            meta: { title: 'Human Resource', current: false, icon: '' },
             children: [
               {
                 name: 'Engineering',
                 path: '#',
-                meta: { title: 'Engineering', current: false, icon: 'Home' }
+                meta: { title: 'IT Engineering', current: false, icon: '' }
               },
               {
                 name: 'Human Resources',
                 path: '#',
-                meta: { title: 'Engineering', current: false, icon: 'Home' }
+                meta: { title: 'Human Engineering', current: false, icon: '' }
               },
               {
-                name: 'Customer Success',
+                name: 'success',
                 path: '#',
-                meta: { title: 'Engineering', current: false, icon: 'Home' }
+                meta: { title: 'Civil Engineering', current: false, icon: '' }
               }
             ]
           },
           {
-            name: 'Human Resources',
+            name: 'resources',
             path: '#',
-            meta: { title: 'Engineering', current: false, icon: 'Home' }
+            meta: { title: 'Human Resources', current: false, icon: '' }
           },
           {
-            name: 'Customer Success',
+            name: 'success',
             path: '#',
-            meta: { title: 'Engineering', current: false, icon: 'Home' }
+            meta: { title: 'success', current: false, icon: '' }
           }
         ]
       },
       {
         name: 'Human Resources',
         path: '#',
-        meta: { title: 'Human Resources', current: false, icon: 'Home' }
+        meta: { title: 'Human Resources', current: false, icon: '' }
       },
       {
         name: 'Customer Success',
         path: '#',
-        meta: { title: 'Customer Success', current: false, icon: 'Home' }
+        meta: { title: 'Customer Success', current: false, icon: '' }
       }
     ]
   },
   {
     name: 'Projects',
     path: '#',
-    meta: { title: 'Projects', current: false, icon: 'Home' },
+    meta: { title: 'Projects', current: false, icon: '' },
     children: [
       {
         name: 'GraphQL API',
         path: '',
-        meta: { title: 'GraphQL API', current: false, icon: 'Home' }
+        meta: { title: 'GraphQL API', current: false, icon: '' }
       },
       {
-        name: 'iOS App',
+        name: 'iOS',
         path: '',
-        meta: { title: 'GraphQL API', current: false, icon: 'Home' }
+        meta: { title: 'iOS App', current: false, icon: '' }
       },
       {
-        name: 'Android App',
+        name: 'android',
         path: '',
-        meta: { title: 'GraphQL API', current: false, icon: 'Home' }
+        meta: { title: 'Android App', current: false, icon: '' }
       },
       {
-        name: 'New Customer Portal',
+        name: 'customer',
         path: '',
-        meta: { title: 'GraphQL API', current: false, icon: 'Home' }
+        meta: { title: 'New Customer Portal', current: false, icon: '' }
       }
     ]
   },
   {
     name: 'Calendar',
-    path: 'about',
-    meta: { title: 'GraphQL API', current: false, icon: 'Home' }
+    path: '',
+    meta: { title: 'Calendar', current: false, icon: '' }
   },
   {
     name: 'Documents',
-    path: 'drawer',
-    meta: { title: 'GraphQL API', current: false, icon: 'Home' }
+    path: '',
+    meta: { title: 'Documents', current: false, icon: '' }
   },
   {
     name: 'Reports',
     path: '',
-    meta: { title: 'GraphQL API', current: false, icon: 'Home' }
+    meta: { title: 'Reports', current: false, icon: '' }
   }
 ])
 </script>

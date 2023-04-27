@@ -1,6 +1,6 @@
 <template>
   <button
-    class="py-2 px-2 border border-gray-200 bg-sky-400 text-white rounded first-letter:capitalize"
+    class="py-2 px-2 border border-gray-200 bg-primary-600 text-white rounded first-letter:capitalize"
     @click="handleClick"
   >
     click me

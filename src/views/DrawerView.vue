@@ -5,6 +5,18 @@
   >
     click me
   </button>
+  <br />
+
+  <button v-tooltip:right.tooltip="'texting'" class="px-1 py-1 rounded bg-primary-500 text-white">
+    Tooltip on top
+  </button>
+  <br />
+  <tool-tip position="bottom" :tooltipText="'custom text'"
+    ><button class="py-2 px-2 text-white bg-primary-500 rounded">
+      Tooltip custom text
+    </button></tool-tip
+  >
+
   <drawer-slide
     :open="open"
     @close="open = false"

@@ -6,6 +6,10 @@ import '@/styles/style.css'
 
 import '@/plugin/global-components'
 
+import directives from './directives'
+
+directives(app)
+
 app.use(createPinia())
 app.use(router)
 app.use(i18n)

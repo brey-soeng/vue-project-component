@@ -1,62 +1,65 @@
 <template>
-  <li>
-    <ul role="list" class="space-y-1">
-      <li @click="handleClick(item)">
-        <RouterLink
-          v-if="!item?.children"
-          :to="item?.path"
+  <li @click="handleClick(list)">
+    <RouterLink
+      v-if="!list?.children"
+      :to="list?.path"
+      :class="[
+        list.meta.current
+          ? 'bg-default-100 text-secondary-700  dark:bg-secondary-700  dark:bg-opacity-50'
+          : 'text-default-700',
+        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold  dark:text-white hover:text-secondary-700  hover:bg-opacity-50 hover:dark:text-white hover:dark:text-opacity-80 hover:dark:bg-secondary-700 hover:dark:bg-opacity-50 hover:bg-default-100'
+      ]"
+    >
+      <SvgIcon v-if="list?.meta?.icon" :name="list?.meta?.icon" />
+      <span
+        v-else
+        :class="[
+          'flex h-6 w-6 shrink-0 items-center justify-center rounded-md border text-[0.625rem] font-medium bg-white dark:bg-secondary-500 dark:bg-opacity-40 dark:text-white dark:border-0 uppercase'
+        ]"
+        >{{ list?.meta?.title.toString().charAt(0) }}</span
+      >
+      <span class="first-letter:capitalize">{{ list?.meta?.title }}</span>
+    </RouterLink>
+    <Disclosure as="div" v-else v-slot="{ open }">
+      <DisclosureButton
+        :class="[
+          list.meta.current
+            ? 'bg-default-100 text-secondary-700 dark:bg-secondary-700  dark:bg-opacity-50'
+            : 'text-default-700',
+          'flex items-center w-full text-left rounded-md p-2 gap-x-3 text-sm leading-6 dark:text-white font-semibold  hover:text-primary-700 hover:bg-opacity-50 hover:dark:text-white hover:dark:text-opacity-80 hover:dark:bg-secondary-700 hover:dark:bg-opacity-50 hover:bg-default-100'
+        ]"
+      >
+        <SvgIcon v-if="list?.meta?.icon" :name="list?.meta?.icon" />
+        <span
+          v-else
           :class="[
-            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-default-500 dark:text-white hover:text-secondary-700  hover:bg-opacity-50 hover:dark:text-white hover:dark:text-opacity-80 hover:dark:bg-secondary-700 hover:dark:bg-opacity-50 hover:bg-default-100'
+            'flex h-6 w-6 shrink-0 items-center justify-center rounded-md border text-[0.625rem] font-medium bg-white dark:bg-secondary-500 dark:bg-opacity-40 dark:text-white dark:border-0 uppercase'
           ]"
+          >{{ list?.meta?.title.toString().charAt(0) }}</span
         >
-          <SvgIcon v-if="item?.meta?.icon" :name="item?.meta?.icon" />
-          <span
-            v-else
-            :class="[
-              'flex h-6 w-6 shrink-0 items-center justify-center rounded-md border text-[0.625rem] font-medium bg-white dark:bg-secondary-500 dark:bg-opacity-40 dark:text-white dark:border-0 uppercase'
-            ]"
-            >{{ item?.meta?.title.toString().charAt(0) }}</span
-          >
-          <span class="first-letter:capitalize">{{ item?.meta?.title }}</span>
-        </RouterLink>
-        <Disclosure as="div" v-else v-slot="{ open }">
-          <DisclosureButton
-            :class="[
-              'flex items-center w-full text-left rounded-md p-2 gap-x-3 text-sm leading-6 dark:text-white font-semibold text-default-500 hover:text-primary-700 hover:bg-opacity-50 hover:dark:text-white hover:dark:text-opacity-80 hover:dark:bg-secondary-700 hover:dark:bg-opacity-50 hover:bg-default-100'
-            ]"
-          >
-            <SvgIcon v-if="item?.meta?.icon" :name="item?.meta?.icon" />
-            <span
-              v-else
-              :class="[
-                'flex h-6 w-6 shrink-0 items-center justify-center rounded-md border text-[0.625rem] font-medium bg-white dark:bg-secondary-500 dark:bg-opacity-40 dark:text-white dark:border-0 uppercase'
-              ]"
-              >{{ item?.meta?.title.toString().charAt(0) }}</span
-            >
-            <span class="first-letter:capitalize">{{ item?.meta?.title }}</span>
-            <ChevronRightIcon
-              :class="[
-                open ? 'rotate-90 text-default-500' : 'text-default-400',
-                'ml-auto h-5 w-5 shrink-0 dark:text-white'
-              ]"
-              aria-hidden="true"
-            />
-          </DisclosureButton>
-          <DisclosurePanel v-if="item?.children" as="ul" :style="indentStyle">
-            <nav-menu-item
-              v-for="subItem in item.children"
-              :items="subItem"
-              :key="subItem.name"
-              :indent="indent"
-            />
-          </DisclosurePanel>
-        </Disclosure>
-      </li>
-    </ul>
+        <span class="first-letter:capitalize">{{ list?.meta?.title }}</span>
+        <ChevronRightIcon
+          :class="[
+            open ? 'rotate-90 text-default-500' : 'text-default-400',
+            'ml-auto h-5 w-5 shrink-0 dark:text-white'
+          ]"
+          aria-hidden="true"
+        />
+      </DisclosureButton>
+      <DisclosurePanel v-if="list?.children && list?.children.length" as="ul" :style="indentStyle">
+        <nav-menu-item
+          v-for="subItem in list?.children"
+          :items="subItem"
+          :key="subItem.name"
+          :indent="indent"
+          @click="(subItem) => $emit('click', subItem)"
+        />
+      </DisclosurePanel>
+    </Disclosure>
   </li>
 </template>
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import SvgIcon from '@/components/SvgIcon.vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
@@ -73,16 +76,20 @@ const props = defineProps({
     default: ''
   }
 })
+
 const indentStyle = computed(() => {
   return {
     'padding-left': props.indent + 'rem'
   }
 })
-const item = ref(props.items)
+
+const list = ref(props.items)
+watch(props.items, (value) => {
+  list.value = value
+})
+
+const emit = defineEmits(['click'])
 const handleClick = (item) => {
-  if (item?.children) {
-    return
-  }
-  console.log(item)
+  emit('click', item)
 }
 </script>

@@ -2,19 +2,25 @@
   <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-secondary-900 px-6">
     <nav class="flex flex-1 flex-col">
       <ul role="list" class="flex flex-1 flex-col">
-        <NavMenuItem
-          v-for="items in navigation"
-          :items="items"
-          :key="items.name"
-          :indent="indent"
-        />
+        <li>
+          <ul role="list" class="space-y-1">
+            <NavMenuItem
+              v-for="items in navigation"
+              :items="items"
+              :key="items.name"
+              :indent="indent"
+              :navigatMenu="navigation"
+              @click="(subItem) => $emit('click', subItem)"
+            />
+          </ul>
+        </li>
       </ul>
     </nav>
   </div>
 </template>
 <script setup>
 import NavMenuItem from './NavMenuItem.vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 const props = defineProps({
   menuList: {
     type: [Object, Array],
@@ -26,6 +32,9 @@ const props = defineProps({
     type: [String, Number],
     default: '0'
   }
+})
+watch(props.menuList, (value) => {
+  navigation.value = value
 })
 const navigation = ref(props.menuList)
 </script>

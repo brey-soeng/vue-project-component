@@ -4,8 +4,6 @@ import router from './router'
 import i18n from './lang'
 import '@/styles/style.css'
 
-import '@/plugin/global-components'
-
 import directives from './directives'
 
 directives(app)

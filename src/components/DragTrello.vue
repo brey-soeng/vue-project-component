@@ -15,7 +15,7 @@
       >
         <template #item="{ element }">
           <div
-            class="py-2 cursor-move mt-2 px-2 bg-white text-primary-800 first-letter:capitalize rounded shadow-md"
+            class="py-2 cursor-move mt-2 px-2 bg-white text-primary-800 first-letter:capitalize rounded shadow-md transition-all duration-500 delay-300"
           >
             {{ element.name }}
           </div>

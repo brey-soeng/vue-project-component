@@ -52,14 +52,15 @@
                   </div>
                 </TransitionChild>
                 <!-- close buttom outside -->
-                <div class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl">
+                <div class="flex h-full flex-col divide-y divide-default-200 bg-white shadow-xl">
                   <div class="flex min-h-0 flex-1 flex-col overflow-y-scroll pb-6">
                     <slot name="header">
                       <div
                         v-if="props.title"
                         class="px-4 py-4 sm:px-6"
                         :class="{
-                          'sticky top-0 border-b border-gray-200 bg-white z-10': props.stickyHeader
+                          'sticky top-0 border-b border-default-200 bg-white z-10':
+                            props.stickyHeader
                         }"
                       >
                         <div class="flex items-start justify-between">

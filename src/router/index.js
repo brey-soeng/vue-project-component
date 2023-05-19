@@ -31,6 +31,12 @@ const router = createRouter({
           name: 'menu',
           meta: { title: 'menu', current: false, hidden: false, permission: '', icon: '' },
           component: () => import('../views/MenuView.vue')
+        },
+        {
+          path: 'trello',
+          name: 'trello',
+          meta: { title: 'trello', current: false, hidden: false, permission: '', icon: '' },
+          component: () => import('../views/TrelloView.vue')
         }
       ]
     }

@@ -3,7 +3,8 @@ export default {
     home: 'Home',
     about: 'About',
     drawer: 'Drawer',
-    menu: 'Menu'
+    menu: 'Menu',
+    trello: 'Drag Trello'
   },
   locale: {
     en: 'English',

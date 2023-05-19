@@ -16,6 +16,67 @@
       Tooltip custom text
     </button></tool-tip
   >
+  {{ scrollInvoked }}
+
+  <div class="h-28 overflow-y-auto" id="scroll-target">
+    <div v-scroll:#scroll-target="onScroll">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sed aspernatur corrupti
+        fugit maiores ipsam blanditiis impedit molestiae voluptas nulla nobis, illo, tempora nemo
+        rem esse nam autem placeat obcaecati.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sed aspernatur corrupti
+        fugit maiores ipsam blanditiis impedit molestiae voluptas nulla nobis, illo, tempora nemo
+        rem esse nam autem placeat obcaecati.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sed aspernatur corrupti
+        fugit maiores ipsam blanditiis impedit molestiae voluptas nulla nobis, illo, tempora nemo
+        rem esse nam autem placeat obcaecati.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sed aspernatur corrupti
+        fugit maiores ipsam blanditiis impedit molestiae voluptas nulla nobis, illo, tempora nemo
+        rem esse nam autem placeat obcaecati.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sed aspernatur corrupti
+        fugit maiores ipsam blanditiis impedit molestiae voluptas nulla nobis, illo, tempora nemo
+        rem esse nam autem placeat obcaecati.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sed aspernatur corrupti
+        fugit maiores ipsam blanditiis impedit molestiae voluptas nulla nobis, illo, tempora nemo
+        rem esse nam autem placeat obcaecati.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sed aspernatur corrupti
+        fugit maiores ipsam blanditiis impedit molestiae voluptas nulla nobis, illo, tempora nemo
+        rem esse nam autem placeat obcaecati.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sed aspernatur corrupti
+        fugit maiores ipsam blanditiis impedit molestiae voluptas nulla nobis, illo, tempora nemo
+        rem esse nam autem placeat obcaecati.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sed aspernatur corrupti
+        fugit maiores ipsam blanditiis impedit molestiae voluptas nulla nobis, illo, tempora nemo
+        rem esse nam autem placeat obcaecati.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sed aspernatur corrupti
+        fugit maiores ipsam blanditiis impedit molestiae voluptas nulla nobis, illo, tempora nemo
+        rem esse nam autem placeat obcaecati.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sed aspernatur corrupti
+        fugit maiores ipsam blanditiis impedit molestiae voluptas nulla nobis, illo, tempora nemo
+        rem esse nam autem placeat obcaecati.
+      </p>
+    </div>
+  </div>
 
   <drawer-slide
     :open="open"
@@ -122,5 +183,9 @@ import { ref } from 'vue'
 const open = ref(false)
 const handleClick = () => {
   open.value = true
+}
+const scrollInvoked = ref(0)
+const onScroll = (e) => {
+  scrollInvoked.value = e.target.scrollTop
 }
 </script>

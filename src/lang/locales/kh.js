@@ -3,7 +3,8 @@ export default {
     home: 'ទំព័រដើម',
     about: 'អំពី',
     drawer: 'ស្លាយ',
-    menu: 'ម៊ីនុយ'
+    menu: 'ម៊ីនុយ',
+    trello: 'Drag Trello'
   },
   locale: {
     en: 'អង់គ្លេស',

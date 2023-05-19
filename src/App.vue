@@ -10,6 +10,7 @@ import Trans from '@/lang/translation'
         <RouterLink :to="Trans.i18nRoute({ name: 'About' })">{{ $t('header.about') }}</RouterLink>
         <RouterLink :to="Trans.i18nRoute({ name: 'drawer' })">{{ $t('header.drawer') }}</RouterLink>
         <RouterLink :to="Trans.i18nRoute({ name: 'menu' })">{{ $t('header.menu') }}</RouterLink>
+        <RouterLink :to="Trans.i18nRoute({ name: 'trello' })">{{ $t('header.trello') }}</RouterLink>
       </nav>
     </div>
   </header>

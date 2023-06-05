@@ -10,6 +10,7 @@ export default defineConfig({
   plugins: [
     vue(),
     unpluginComponent(),
+
     VueI18nPlugin({
       runtimeOnly: false,
       include: path.resolve(__dirname, './src/lang/locales/**') // provide a path to the folder where you'll store translation data (see below)

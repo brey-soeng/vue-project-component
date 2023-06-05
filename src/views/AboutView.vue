@@ -9,6 +9,7 @@
       quod placeat nihil veniam numquam, corrupti dolorum expedita saepe at, perferendis nesciunt
       harum tenetur impedit in quibusdam tempora?
     </p>
+    <input type="text" class="form-input" />
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur hic provident facere
       quod placeat nihil veniam numquam, corrupti dolorum expedita saepe at, perferendis nesciunt

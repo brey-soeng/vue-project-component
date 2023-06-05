@@ -12,7 +12,7 @@ const routes = [
         path: '',
         name: 'Home',
         meta: {
-          title: 'home',
+          title: 'Home',
           current: false,
           hidden: false,
           permission: '',
@@ -25,7 +25,7 @@ const routes = [
         path: 'menu',
         name: 'menu',
         meta: {
-          title: 'menu',
+          title: 'Menu',
           current: false,
           hidden: false,
           permission: '',
@@ -38,7 +38,7 @@ const routes = [
         path: 'about',
         name: 'about',
         meta: {
-          title: 'about',
+          title: 'About',
           current: false,
           hidden: false,
           permission: '',
@@ -51,7 +51,7 @@ const routes = [
         path: 'drawer',
         name: 'drawer',
         meta: {
-          title: 'drawer',
+          title: 'Drawer',
           current: false,
           hidden: false,
           permission: '',
@@ -64,7 +64,7 @@ const routes = [
         path: 'trello',
         name: 'trello',
         meta: {
-          title: 'trello',
+          title: 'Trello',
           current: false,
           hidden: false,
           permission: '',

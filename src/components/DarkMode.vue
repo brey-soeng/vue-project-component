@@ -1,11 +1,10 @@
 <template>
   <button @click="switchwitchDarkMode" class="p-2">
-    <SunIcon v-if="settingStore.themeMode" class="h-6 w-6" />
-    <MoonIcon v-else class="h-6 w-6" />
+    <svg-icon name="Sun" v-if="settingStore.themeMode" class="h-6 w-6" />
+    <svg-icon name="Moon" v-else class="h-6 w-6" />
   </button>
 </template>
 <script setup>
-import { SunIcon, MoonIcon } from '@heroicons/vue/24/outline'
 import { useSettingStore } from '@/stores/settingStore.js'
 const settingStore = useSettingStore()
 const switchwitchDarkMode = () => {

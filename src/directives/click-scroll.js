@@ -11,12 +11,15 @@ const clickScrollDirective = (app) => {
 
 function init(el, binding) {
   el.style.cursor = 'pointer'
+
   el.addEventListener('click', () => {
+    const scroller = window.document.getElementById('elementId')
     let coord = 0
     coord = binding.value
       ? el.getBoundingClientRect().top + window.scrollY - binding.value
       : el.getBoundingClientRect().top + window.scrollY
-    window.scroll({ top: coord, behavior: 'smooth' })
+    scroller.scroll({ top: coord, behavior: 'smooth' })
+    // window.scroll({ top: coord, behavior: 'smooth' })
   })
 }
 

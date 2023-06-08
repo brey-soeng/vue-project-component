@@ -32,9 +32,11 @@ function init(el, binding) {
   const getScroll = (target, top) => {
     const prop = top ? 'pageYOffset' : 'pageXOffset'
     const method = top ? 'scrollTop' : 'scrollLeft'
-    let ret = target[prop]
+    let ret = target[method]
+    // let ret = target[prop]
     if (typeof ret !== 'number') {
-      ret = window.document.documentElement[method]
+      ret = window.document.documentElement[prop]
+      // ret = window.document.documentElement[method]
     }
     return ret
   }
@@ -63,8 +65,11 @@ function init(el, binding) {
     active = false
   }
 
+  const scroller = window.document.getElementById('elementId')
+
   const check = () => {
-    const scrollTop = getScroll(window, true)
+    const scrollTop = getScroll(scroller, true)
+    //const scrollTop = getScroll(window, true)
     const offsetTop = el.getBoundingClientRect().top
     if (offsetTop < stickyTop) {
       elStyle.cssText = `top: ${stickyTop}px; z-index: ${zIndex}`
@@ -72,7 +77,7 @@ function init(el, binding) {
     } else {
       if (scrollTop < elHeight + stickyTop) {
         reset()
-        elStyle.cssText = `top: 0px; z-index: ${zIndex}`
+        elStyle.cssText = `top: ${scrollTop}px; z-index: ${zIndex}`
       }
     }
   }
@@ -81,7 +86,8 @@ function init(el, binding) {
     check()
   }
 
-  window.addEventListener('scroll', listenAction)
+  // window.addEventListener('scroll', listenAction)
+  scroller.addEventListener('scroll', listenAction)
 }
 
 // unbind() {

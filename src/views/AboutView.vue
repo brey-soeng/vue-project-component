@@ -1,5 +1,5 @@
 <template>
-  <div class="about px-10">
+  <div class="about">
     <h1>This is an about page</h1>
 
     <dark-mode />
@@ -35,7 +35,7 @@
       harum tenetur impedit in quibusdam tempora?
     </p>
 
-    <div class="py-2 px-2 bg-dark-500 text-white" v-sticky.params="{ stickyTop: 100 }">
+    <div class="py-2 px-2 bg-dark-500 text-white w-full" v-sticky.params="{ stickyTop: 100 }">
       sticky scroll
     </div>
 

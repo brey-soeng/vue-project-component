@@ -35,7 +35,7 @@
       harum tenetur impedit in quibusdam tempora?
     </p>
 
-    <div class="py-2 px-2 bg-dark-500 text-white w-full" v-sticky.params="{ stickyTop: 100 }">
+    <div class="py-2 px-2 bg-dark-500 text-white w-auto" v-sticky.params="{ stickyTop: 100 }">
       sticky scroll
     </div>
 

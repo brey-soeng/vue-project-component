@@ -14,7 +14,8 @@ module.exports = {
       neutral: colors.teal,
       warning: colors.orange,
       danger: colors.red,
-      success: colors.green
+      success: colors.green,
+      main: '#f0f2f5'
     },
     extend: {}
   },

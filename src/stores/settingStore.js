@@ -2,7 +2,8 @@ import { cloneDeep } from 'lodash'
 import { defineStore } from 'pinia'
 
 const defaultState = {
-  themeMode: false
+  themeMode: false,
+  transition: 'slide'
 }
 export const useSettingStore = defineStore('settingStore', {
   state: () => cloneDeep(defaultState),

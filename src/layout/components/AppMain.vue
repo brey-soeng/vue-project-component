@@ -9,15 +9,15 @@
 </template>
 <style lang="postcss" scoped>
 .slide-enter-active {
-  animation: slide-in 0.2s ease-out forwards;
-  transition: opacity 0.2s;
+  animation: slide-in 0.3s ease-out forwards;
+  transition: opacity 0.4s;
 }
 .slide-leave {
   opacity: 1;
 }
 .slide-leave-active {
-  /* animation: slide-out 0.2s ease-out forwards;
-  transition: opacity 0.2s; */
+  /* animation: slide-out 0.3s ease-in forwards; */
+  /* transition: opacity 0.4s; */
   opacity: 0;
 }
 

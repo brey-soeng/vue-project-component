@@ -2,8 +2,6 @@
   <div class="about">
     <h1>This is an about page</h1>
 
-    <dark-mode />
-
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur hic provident facere
       quod placeat nihil veniam numquam, corrupti dolorum expedita saepe at, perferendis nesciunt

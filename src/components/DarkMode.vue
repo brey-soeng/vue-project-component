@@ -1,7 +1,11 @@
 <template>
-  <button @click="switchwitchDarkMode" class="p-2">
-    <svg-icon name="Sun" v-if="settingStore.themeMode" class="h-6 w-6" />
-    <svg-icon name="Moon" v-else class="h-6 w-6" />
+  <button
+    v-tooltip:bottom.tooltip="settingStore.themeMode ? 'Dark' : 'Light'"
+    @click="switchwitchDarkMode"
+    class="p-2 flex justify-center items-center rounded-full hover:text-secondary-900 hover:bg-default-100 hover:opacity-70 active:bg-primary-600 active:text-white hover:dark:bg-secondary-700 hover:dark:opacity-70 hover:dark:text-white"
+  >
+    <svg-icon name="Sun" v-if="settingStore.themeMode" class="h-5 w-5" />
+    <svg-icon name="Moon" v-else class="h-5 w-5" />
   </button>
 </template>
 <script setup>

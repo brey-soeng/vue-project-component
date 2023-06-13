@@ -1,7 +1,18 @@
 import router from '@/router'
 import getPageTitle from '@/utils/getPageTitle'
+import { useSettingStore } from '@/stores/settingStore.js'
+import translate from './utils/translate'
+import Trans from '@/lang/translation'
 router.beforeEach(async (to, from, next) => {
-  document.title = getPageTitle(to.meta.title)
+  // translate document title
+  const lang = localStorage.getItem('locale')
+  await Trans.switchLanguages(lang)
+  const title = translate(`header.${to.name}`)
+  document.title = getPageTitle(title)
+  // change darkmode
+  const settingStore = useSettingStore()
+  settingStore.setDarkMode()
+
   next()
 })
 

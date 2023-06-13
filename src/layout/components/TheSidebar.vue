@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <nav class="flex gap-4 flex-col">
-      <RouterLink :to="Trans.i18nRoute({ name: 'Home' })">{{ $t('header.home') }}</RouterLink>
+      <RouterLink :to="Trans.i18nRoute({ name: 'home' })">{{ $t('header.home') }}</RouterLink>
       <RouterLink :to="Trans.i18nRoute({ name: 'menu' })">{{ $t('header.menu') }}</RouterLink>
       <RouterLink :to="Trans.i18nRoute({ name: 'trello' })">{{ $t('header.trello') }}</RouterLink>
       <RouterLink :to="Trans.i18nRoute({ name: 'drawer' })">{{ $t('header.drawer') }}</RouterLink>

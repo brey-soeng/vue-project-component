@@ -20,6 +20,7 @@ const { t } = useI18n()
 const router = useRouter()
 const switchLanguage = async (event) => {
   const newLocale = event.target.value
+  console.log(newLocale)
   await Trans.switchLanguages(newLocale)
   try {
     await router.replace({ params: { locale: newLocale } })

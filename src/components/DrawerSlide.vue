@@ -148,7 +148,7 @@ const props = defineProps({
   },
   width: {
     type: [String, Number],
-    default: 25
+    default: 35
   },
   height: {
     type: [Number, String],
@@ -256,14 +256,16 @@ const addClass = computed(() => {
 })
 const maxWidthPanel = computed(() => {
   if (props.direction === 'ltr' || props.direction === 'rtl') {
+    const width = props.width >= 100 ? 'vw' : 'vh'
     return {
-      width: props.width + 'vw',
+      width: props.width + width,
       height: '100vh'
     }
   } else {
+    const height = props.height >= 100 ? 'vw' : 'vh'
     return {
       width: '100vw',
-      height: props.height + 'vh'
+      height: props.height + height
     }
   }
 })

@@ -18,5 +18,15 @@ export const useSettingStore = defineStore('settingStore', {
       state.isCollapMenu = data
     }
   },
-  actions: {}
+  actions: {
+    // setup darkmode
+    setDarkMode() {
+      this.themeMode = localStorage.theme === 'dark' ? true : false
+      if (this.themeMode) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    }
+  }
 })

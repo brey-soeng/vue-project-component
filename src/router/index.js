@@ -10,7 +10,7 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'Home',
+        name: 'home',
         meta: {
           title: 'Home',
           current: false,

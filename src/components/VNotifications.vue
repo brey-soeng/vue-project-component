@@ -1,10 +1,6 @@
 <template>
-  <div
-    aria-live="assertive"
-    class="pointer-events-none z-20 fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
-  >
-    <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
-      <!-- Notification panel, dynamically insert this into the live region when it needs to be displayed -->
+  <div class="pointer-events-none z-50 fixed w-full px-4 py-4" :class="[positionClass.addClass]">
+    <div class="w-full" :class="[positionClass.childrenClass]">
       <transition
         enter-active-class="transform ease-out duration-300 transition"
         enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
@@ -14,7 +10,7 @@
         leave-to-class="opacity-0"
       >
         <div
-          v-if="props.visible"
+          v-if="show"
           class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
         >
           <div class="p-4">
@@ -23,8 +19,10 @@
                 <CheckCircleIcon class="h-6 w-6 text-success-600" aria-hidden="true" />
               </div>
               <div class="ml-3 w-0 flex-1 pt-0.5">
-                <p class="text-sm font-medium text-gray-900">Successfully saved!</p>
-                <p class="mt-1 text-sm text-gray-500">Anyone with a link can now view this file.</p>
+                <h1 v-if="props.title" class="text-sm font-medium text-gray-900">
+                  {{ props.title }}
+                </h1>
+                <div class="text-sm text-gray-500 break-all" v-html="props.message" />
               </div>
               <div class="ml-4 flex flex-shrink-0">
                 <button
@@ -44,16 +42,18 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { CheckCircleIcon } from '@heroicons/vue/24/outline'
 import { XMarkIcon } from '@heroicons/vue/20/solid'
-
 const props = defineProps({
   visible: { type: Boolean, default: true },
   title: { type: String, default: 'Success saved!' },
-  message: { type: String, default: 'Anyone with a link can now view this file' },
-  position: {
+  message: {
     type: String,
+    default: 'Anyone with a link can now view this file'
+  },
+  position: {
+    type: [String, Array],
     default: () => 'top-right',
     validator: (value) => {
       return [
@@ -62,8 +62,9 @@ const props = defineProps({
         'top-left',
         'top-center',
         'left-center',
-        'left-bottom',
-        'bottom-center'
+        'bottom-left',
+        'bottom-center',
+        'top-right'
       ].includes(value)
     }
   },
@@ -71,7 +72,7 @@ const props = defineProps({
     type: String,
     default: () => 'default',
     validator: (value) => {
-      return ['success', 'warning', 'error', 'primary'].includes(value)
+      return ['success', 'warning', 'error', 'primary', 'default'].includes(value)
     }
   },
   avatar: {
@@ -82,10 +83,71 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  iconName: {
+    type: String,
+    default: ''
+  },
+
+  iconSize: {
+    type: [String, Number],
+    default: '14'
+  },
+  iconStroke: {
+    type: [Number, String],
+    default: 1
+  },
   duration: {
     type: [Number, String],
     default: 3000
+  },
+  isBorder: {
+    type: Boolean,
+    default: false
+  },
+  border: {
+    type: String,
+    default: () => 'right',
+    validator: (value) => {
+      return ['left', 'bottom', 'top', 'right'].includes(value)
+    }
+  },
+  outline: {
+    type: Boolean,
+    default: false
   }
 })
-const show = ref(true)
+const positionClass = computed(() => {
+  let addClass = ''
+  let childrenClass = ''
+  switch (props.position) {
+    case 'top-right':
+      childrenClass = 'justify-end items-center flex'
+      addClass = 'top-0 right-0'
+      break
+    case 'top-left':
+      childrenClass = 'justify-start items-start flex'
+      addClass = 'left-0 top-[60px]'
+      break
+    case 'right-bottom':
+      childrenClass = 'justify-end items-end flex'
+      addClass = 'bottom-0 right-0'
+      break
+    case 'bottom-left':
+      childrenClass = 'justify-start items-start flex'
+      addClass = 'bottom-0 left-0'
+      break
+    case 'bottom-center':
+      childrenClass = 'flex justify-center'
+      addClass = 'bottom-0'
+      break
+    // case 'right-center':
+    //   childrenClass = 'flex'
+    //   addClass = 'top-1/2 justify-end flex'
+    //   break
+    default:
+      break
+  }
+  return { addClass, childrenClass }
+})
+const show = ref(props.visible)
 </script>

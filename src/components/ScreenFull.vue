@@ -1,11 +1,13 @@
 <template>
-  <button
-    v-tooltip:bottom.tooltip="'Fullscreen'"
-    class="p-2 flex justify-center items-center rounded-full hover:text-secondary-900 hover:bg-default-100 hover:opacity-70 active:bg-primary-600 active:text-white hover:dark:bg-secondary-700 hover:dark:opacity-70 dark:text-default-300 hover:dark:text-white"
-    @click="handleToggle"
-  >
-    <svg-icon class="cursor-pointer" :name="isFullscreen ? 'Pointin' : 'Pointout'" />
-  </button>
+  <tool-tip position="bottom" :tooltipText="'Fullscreen'">
+    <button
+      v-ripple
+      class="p-2 flex justify-center items-center rounded-full hover:text-secondary-900 hover:bg-default-100 hover:opacity-70 active:bg-primary-600 active:text-white hover:dark:bg-secondary-700 hover:dark:opacity-70 dark:text-default-300 hover:dark:text-white"
+      @click="handleToggle"
+    >
+      <svg-icon class="cursor-pointer" :name="isFullscreen ? 'Pointin' : 'Pointout'" />
+    </button>
+  </tool-tip>
 </template>
 <script setup>
 import { onMounted, onBeforeUnmount, ref } from 'vue'

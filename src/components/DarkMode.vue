@@ -1,12 +1,14 @@
 <template>
-  <button
-    v-tooltip:bottom.tooltip="settingStore.themeMode ? 'Dark' : 'Light'"
-    @click="switchwitchDarkMode"
-    class="p-2 flex justify-center items-center rounded-full hover:text-secondary-900 hover:bg-default-100 hover:opacity-70 active:bg-primary-600 active:text-white hover:dark:bg-secondary-700 hover:dark:opacity-70 hover:dark:text-white"
-  >
-    <svg-icon name="Sun" v-if="settingStore.themeMode" class="h-5 w-5" />
-    <svg-icon name="Moon" v-else class="h-5 w-5" />
-  </button>
+  <tool-tip position="bottom" :tooltipText="settingStore.themeMode ? 'Dark' : 'Light'">
+    <button
+      v-ripple
+      @click="switchwitchDarkMode"
+      class="p-2 flex justify-center ripple-class items-center rounded-full hover:text-secondary-900 active:bg-primary-600 active:text-white hover:bg-default-100 hover:opacity-70 hover:dark:bg-secondary-700 hover:dark:opacity-70 hover:dark:text-white"
+    >
+      <svg-icon name="Sun" v-if="settingStore.themeMode" class="h-5 w-5" />
+      <svg-icon name="Moon" v-else class="h-5 w-5" />
+    </button>
+  </tool-tip>
 </template>
 <script setup>
 import { useSettingStore } from '@/stores/settingStore.js'

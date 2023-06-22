@@ -32,7 +32,7 @@ defineProps({
   }
   &:before {
     content: '';
-    border: 5px solid transparent; /* opinion 4 */
+    border: 7px solid transparent; /* opinion 4 */
     z-index: 1001; /* absurdity 1 */
   }
   &:after {

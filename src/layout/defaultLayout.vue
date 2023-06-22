@@ -1,5 +1,5 @@
 <template>
-  <div class="relative bg-main dark:bg-dark dark:text-default-400 dark:font-normal">
+  <div class="bg-main dark:bg-dark dark:text-default-400 dark:font-normal">
     <!-- <div class="absolute top-0 left-0 w-full bg-dark-300 z-10">hello topbar</div>
     <div class="absolute top-2 left-0 w-full bg-dark-600 py-3 z-10">navbar</div> -->
     <!-- body -->
@@ -12,7 +12,7 @@
       </div>
       <div
         id="elementId"
-        class="w-full min-h-screen overflow-y-auto relative scrollbar-gatter ease-in-out duration-300"
+        class="w-full min-h-screen overflow-y-auto scrollbar-gatter ease-in-out duration-300"
         :style="{ height: 'calc(100vh - 64px)' }"
       >
         <TheNavbar />

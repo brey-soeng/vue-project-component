@@ -4,28 +4,33 @@
   >
     <div class="flex justify-between items-center">
       <div class="flex justify-start items-center flex-wrap gap-3 text-white">
-        <button
-          v-tooltip:bottom.tooltip="'Collape'"
-          @click="handleCollapeMenu"
-          class="cursor-pointer p-2 flex justify-center items-center hover:dark:translate-0 hover:dark:translate-y-0 duration-75 rounded-full dark:text-default-300 text-secondary-900 hover:text-secondary-900 hover:bg-default-100 hover:opacity-70 active:bg-primary-700 active:text-white hover:dark:bg-secondary-700 hover:dark:opacity-70 hover:dark:text-white"
-        >
-          <svg-icon
-            name="Adjustment"
-            stroke-width="1.5"
-            :class="settings.isCollapMenu ? 'rotate-180' : ''"
-          />
-        </button>
+        <tool-tip position="bottom" :tooltipText="'Collape'">
+          <button
+            @click="handleCollapeMenu"
+            v-ripple
+            class="ripple-class cursor-pointer p-2 flex justify-center items-center hover:dark:translate-0 hover:dark:translate-y-0 duration-75 rounded-full dark:text-default-300 text-secondary-900 hover:text-secondary-900 hover:bg-default-100 hover:opacity-70 active:bg-primary-700 active:text-white hover:dark:bg-secondary-700 hover:dark:opacity-70 hover:dark:text-white"
+          >
+            <svg-icon
+              name="Adjustment"
+              stroke-width="1.5"
+              :class="settings.isCollapMenu ? 'rotate-180' : ''"
+            />
+          </button>
+        </tool-tip>
       </div>
       <div class="flex justify-end gap-x-3 items-center">
-        <dark-mode />
+        <TheLanguage />
+        <TheDardmode />
         <ScreenFull />
+        <TheShortCut />
+        <TheNotification />
         <TheProfile />
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import { TheProfile } from './index'
+import { TheProfile, TheShortCut, TheNotification, TheLanguage, TheDardmode } from './index'
 import { useSettingStore } from '@/stores/settingStore'
 const settings = useSettingStore()
 // import { RouterLink } from 'vue-router'

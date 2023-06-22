@@ -1,5 +1,9 @@
 <template>
   <div class="about">
+    <v-notifications position="right-center" />
+    <button v-ripple class="bg-primary-400 rounded text-white px-2 py-2 capitalize button">
+      riple buttom
+    </button>
     <h1>This is an about page</h1>
 
     <p>

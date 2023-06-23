@@ -5,7 +5,8 @@ const defaultState = {
   isCollapMenu: true,
   menuWidth: '320',
   themeMode: false,
-  transition: 'slide'
+  transition: 'slide',
+  activeLang: ''
 }
 export const useSettingStore = defineStore('settingStore', {
   state: () => cloneDeep(defaultState),

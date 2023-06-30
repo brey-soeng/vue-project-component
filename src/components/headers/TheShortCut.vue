@@ -5,7 +5,7 @@
         @click="handleClick"
         v-click-outside="handleClickOutside"
         v-ripple
-        class="p-2 flex justify-center ripple-class items-center rounded-full hover:text-secondary-900 active:bg-primary-600 active:text-white hover:bg-default-100 hover:opacity-70 hover:dark:bg-secondary-700 hover:dark:opacity-70 hover:dark:text-white"
+        class="p-2 flex justify-center ripple-class items-center rounded-full text-default-500 dark:text-default-300 hover:dark:bg-primary-800 hover:dark:text-primary-500 hover:text-primary-500 hover:dark:bg-opacity-10 hover:bg-primary-800 hover:bg-opacity-10"
       >
         <SquaresPlusIcon class="h-6 w-6 text-gray-400" aria-hidden="true" />
       </button>
@@ -20,9 +20,28 @@
     >
       <div
         v-if="visible"
-        class="list-none border-default-200 dark:bg-dark dark:text-white mt-2 dark:border-default-500 p-0 absolute right-0 z-10 ease-in-out duration-300 w-56 bg-white text-default-500 border rounded"
+        class="list-none border-default-200 dark:bg-dark dark:text-white mt-2 dark:border-default-500 p-0 absolute right-0 z-10 ease-in-out duration-300 w-96 bg-white text-default-500 border rounded"
       >
-        Hello world
+        <div
+          class="py-4 px-3 flex justify-between items-center border-b border-default-200 dark:border-default-500"
+        >
+          <h1 class="text-lg first-letter:capitalize font-semibold text-default-400">Shortcut</h1>
+          <button
+            @click="handleClick"
+            v-ripple
+            class="p-2 flex justify-center ripple-class items-center rounded-full text-default-500 dark:text-default-300 hover:dark:bg-primary-800 hover:dark:text-primary-500 hover:text-primary-500 hover:dark:bg-opacity-10 hover:bg-primary-800 hover:bg-opacity-10"
+          >
+            <SquaresPlusIcon class="h-6 w-6 text-gray-400" aria-hidden="true" />
+          </button>
+        </div>
+        <div class="grid grid-cols-2">
+          <div
+            class="border-r border-default-200 dark:border-default-500 py-3 px-3 flex justify-center items-center"
+          >
+            hello world
+          </div>
+          <div class="py-3 px-3 flex justify-center items-center">hello world</div>
+        </div>
       </div>
     </transition>
   </div>

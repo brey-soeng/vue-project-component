@@ -8,7 +8,7 @@
           <button
             @click="handleCollapeMenu"
             v-ripple
-            class="ripple-class cursor-pointer p-2 flex justify-center items-center hover:dark:translate-0 hover:dark:translate-y-0 duration-75 rounded-full dark:text-default-300 text-secondary-900 hover:text-secondary-900 hover:bg-default-100 hover:opacity-70 active:bg-primary-700 active:text-white hover:dark:bg-secondary-700 hover:dark:opacity-70 hover:dark:text-white"
+            class="ripple-class cursor-pointer p-2 flex justify-center items-center hover:dark:translate-0 hover:dark:translate-y-0 duration-75 rounded-full text-default-500 dark:text-default-300 hover:dark:bg-primary-800 hover:dark:text-primary-500 hover:text-primary-500 hover:dark:bg-opacity-10 hover:bg-primary-800 hover:bg-opacity-10"
           >
             <svg-icon
               name="Adjustment"

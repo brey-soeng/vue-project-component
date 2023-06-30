@@ -2,7 +2,7 @@
   <tool-tip position="bottom" :tooltipText="'Fullscreen'">
     <button
       v-ripple
-      class="p-2 flex justify-center items-center rounded-full hover:text-secondary-900 hover:bg-default-100 hover:opacity-70 active:bg-primary-600 active:text-white hover:dark:bg-secondary-700 hover:dark:opacity-70 dark:text-default-300 hover:dark:text-white"
+      class="p-2 flex justify-center items-center rounded-full text-default-500 dark:text-default-300 hover:dark:bg-primary-800 hover:dark:text-primary-500 hover:text-primary-500 hover:dark:bg-opacity-10 hover:bg-primary-800 hover:bg-opacity-10"
       @click="handleToggle"
     >
       <svg-icon class="cursor-pointer" :name="isFullscreen ? 'Pointin' : 'Pointout'" />

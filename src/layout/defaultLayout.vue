@@ -5,7 +5,7 @@
     <!-- body -->
     <div class="flex justify-start items-start">
       <div
-        class="bg-white translate-x-0 ease-in-out duration-300 py-4 px-4 min-h-screen overflow-y-auto overflow-hidden border-r border-default-100"
+        class="bg-dark text-default-400 translate-x-0 ease-in-out duration-300 py-4 px-4 min-h-screen overflow-y-auto overflow-hidden border-r dark:border-default-500"
         :style="`width:${collapedWidth}px`"
       >
         <TheSidebar />

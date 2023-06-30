@@ -1,10 +1,23 @@
 <template>
   <div class="py-10 w-96">
+    <button @click="handleModal" class="bg-primary-600 text-white py-2 px-2 rounded mb-3">
+      Click modal
+    </button>
     <nav-menu :menuList="navigation" />
+    <the-modal v-model="visible" title="Modal title">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, dolorum. Cum, nemo.
+      Quibusdam expedita omnis velit officia molestias, cupiditate enim doloribus libero accusamus
+      dolores vero voluptas! Corporis asperiores voluptatum ad.
+      <template> hello world </template>
+    </the-modal>
   </div>
 </template>
 <script setup>
 import { ref } from 'vue'
+const visible = ref(false)
+const handleModal = () => {
+  visible.value = true
+}
 const navigation = ref([
   {
     name: 'dashboard',

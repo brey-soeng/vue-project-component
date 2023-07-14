@@ -61,6 +61,19 @@ const routes = [
         component: () => import('../views/DrawerView.vue')
       },
       {
+        path: 'notification',
+        name: 'notification',
+        meta: {
+          title: 'Notification',
+          current: false,
+          hidden: false,
+          permission: '',
+          icon: '',
+          transition: 'slide'
+        },
+        component: () => import('../views/NotificationView.vue')
+      },
+      {
         path: 'trello',
         name: 'trello',
         meta: {

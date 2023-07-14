@@ -4,7 +4,8 @@ export default {
     about: '关于',
     drawer: '抽屉',
     menu: '菜单',
-    trello: 'Drag Trello'
+    trello: 'Drag Trello',
+    notification: 'Notification'
   },
   locale: {
     en: '英语',

@@ -4,7 +4,8 @@ export default {
     about: 'About',
     drawer: 'Drawer',
     menu: 'Menu',
-    trello: 'Drag Trello'
+    trello: 'Drag Trello',
+    notification: 'Notification'
   },
   locale: {
     en: 'English',

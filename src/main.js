@@ -5,7 +5,6 @@ import i18n from './lang'
 import '@/styles/style.css'
 import './beforeRouterPermission'
 import directives from './directives'
-
 directives(app)
 
 app.use(createPinia())

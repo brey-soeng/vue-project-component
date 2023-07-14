@@ -6,6 +6,9 @@
       <RouterLink :to="Trans.i18nRoute({ name: 'trello' })">{{ $t('header.trello') }}</RouterLink>
       <RouterLink :to="Trans.i18nRoute({ name: 'drawer' })">{{ $t('header.drawer') }}</RouterLink>
       <RouterLink :to="Trans.i18nRoute({ name: 'about' })">{{ $t('header.about') }}</RouterLink>
+      <RouterLink :to="Trans.i18nRoute({ name: 'notification' })">{{
+        $t('header.notification')
+      }}</RouterLink>
     </nav>
   </div>
 </template>

@@ -25,62 +25,6 @@ const navigation = ref([
     meta: { title: 'Dashboard', current: false, icon: 'Home' }
   },
   {
-    name: 'School',
-    path: '#',
-    meta: { title: 'Academic', current: false, icon: 'Academic' },
-    children: [
-      {
-        name: 'Engineering',
-        path: '#',
-        meta: { title: 'Engineering', current: false, icon: '' },
-        children: [
-          {
-            name: 'human',
-            path: '#',
-            meta: { title: 'Human Resource', current: false, icon: '' },
-            children: [
-              {
-                name: 'Engineering',
-                path: '#',
-                meta: { title: 'IT Engineering', current: false, icon: '' }
-              },
-              {
-                name: 'Human Resources',
-                path: '#',
-                meta: { title: 'Human Engineering', current: false, icon: '' }
-              },
-              {
-                name: 'success',
-                path: '#',
-                meta: { title: 'Civil Engineering', current: false, icon: '' }
-              }
-            ]
-          },
-          {
-            name: 'resources',
-            path: '#',
-            meta: { title: 'Human Resources', current: false, icon: '' }
-          },
-          {
-            name: 'success',
-            path: '#',
-            meta: { title: 'success', current: false, icon: '' }
-          }
-        ]
-      },
-      {
-        name: 'Human Resources',
-        path: '#',
-        meta: { title: 'Human Resources', current: false, icon: '' }
-      },
-      {
-        name: 'Customer Success',
-        path: '#',
-        meta: { title: 'Customer Success', current: false, icon: '' }
-      }
-    ]
-  },
-  {
     name: 'Projects',
     path: '#',
     meta: { title: 'Projects', current: false, icon: '' },

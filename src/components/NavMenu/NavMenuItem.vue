@@ -4,7 +4,7 @@
       v-if="!list?.children"
       :to="list?.path"
       :class="[
-        list.meta.current
+        list.name === parentName && !list?.children
           ? 'bg-default-100 text-secondary-700  dark:bg-secondary-700  dark:bg-opacity-50'
           : 'text-default-700',
         'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold  dark:text-white hover:text-secondary-700  hover:bg-opacity-50 hover:dark:text-white hover:dark:text-opacity-80 hover:dark:bg-secondary-700 hover:dark:bg-opacity-50 hover:bg-default-100'
@@ -23,7 +23,7 @@
     <Disclosure as="div" v-else v-slot="{ open }">
       <DisclosureButton
         :class="[
-          list.meta.current
+          list?.children.includes(childrenName) === childrenName
             ? 'bg-default-100 text-secondary-700 dark:bg-secondary-700  dark:bg-opacity-50'
             : 'text-default-700',
           'flex items-center w-full text-left rounded-md p-2 gap-x-3 text-sm leading-6 dark:text-white font-semibold  hover:text-primary-700 hover:bg-opacity-50 hover:dark:text-white hover:dark:text-opacity-80 hover:dark:bg-secondary-700 hover:dark:bg-opacity-50 hover:bg-default-100'
@@ -48,18 +48,19 @@
       </DisclosureButton>
       <DisclosurePanel v-if="list?.children && list?.children.length" as="ul" :style="indentStyle">
         <nav-menu-item
-          v-for="subItem in list?.children"
+          v-for="(subItem, _childIndex) in list?.children"
           :items="subItem"
           :key="subItem.name"
           :indent="indent"
-          @click="(subItem) => $emit('click', subItem)"
+          :index="_childIndex"
+          @click="handleNavItem(subItem)"
         />
       </DisclosurePanel>
     </Disclosure>
   </li>
 </template>
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import SvgIcon from '@/components/SvgIcon.vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
@@ -70,6 +71,10 @@ const props = defineProps({
     default() {
       return []
     }
+  },
+  index: {
+    type: [Number, String],
+    default: ''
   },
   indent: {
     type: [String, Number],
@@ -82,14 +87,20 @@ const indentStyle = computed(() => {
     'padding-left': props.indent + 'rem'
   }
 })
-
 const list = ref(props.items)
-watch(props.items, (value) => {
-  list.value = value
-})
-
+const parentName = ref(null)
+const childrenName = ref(null)
 const emit = defineEmits(['click'])
-const handleClick = (item) => {
+const handleNavItem = (item) => {
   emit('click', item)
+}
+const handleClick = (item) => {
+  console.log(item)
+  if (!item.children) {
+    parentName.value = item.name
+  } else {
+    childrenName.value = item.name
+  }
+  // emit('click', item)
 }
 </script>

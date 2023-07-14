@@ -5,12 +5,12 @@
         <li>
           <ul role="list" class="space-y-1">
             <NavMenuItem
-              v-for="items in navigation"
+              v-for="(items, _index) in navigation"
               :items="items"
-              :key="items.name"
+              :key="items?.name"
               :indent="indent"
-              :navigatMenu="navigation"
-              @click="(subItem) => $emit('click', subItem)"
+              :index="_index"
+              @click="handleNavItem(items)"
             />
           </ul>
         </li>
@@ -36,5 +36,10 @@ const props = defineProps({
 watch(props.menuList, (value) => {
   navigation.value = value
 })
+const emit = defineEmits(['click'])
+const handleNavItem = (items) => {
+  emit('click', items)
+}
+
 const navigation = ref(props.menuList)
 </script>

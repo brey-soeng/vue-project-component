@@ -4,7 +4,8 @@ export default {
     about: 'អំពី',
     drawer: 'ស្លាយ',
     menu: 'ម៊ីនុយ',
-    trello: 'Drag Trello'
+    trello: 'Drag Trello',
+    notification: 'Notification'
   },
   locale: {
     en: 'អង់គ្លេស',

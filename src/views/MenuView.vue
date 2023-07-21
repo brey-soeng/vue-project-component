@@ -21,49 +21,93 @@ const handleModal = () => {
 const navigation = ref([
   {
     name: 'dashboard',
-    path: '',
+    path: '#',
     meta: { title: 'Dashboard', current: false, icon: 'Home' }
   },
   {
     name: 'Projects',
     path: '#',
-    meta: { title: 'Projects', current: false, icon: '' },
+    meta: { title: 'Projects', current: false, icon: 'Home' },
     children: [
       {
         name: 'GraphQL API',
-        path: '',
-        meta: { title: 'GraphQL API', current: false, icon: '' }
+        path: '#',
+        meta: { title: 'GraphQL API', current: false, icon: '' },
+        children: [
+          {
+            name: 'GraphQL API',
+            path: '#',
+            meta: { title: 'GraphQL API', current: false, icon: '' }
+          },
+          {
+            name: 'iOS',
+            path: '#',
+            meta: { title: 'iOS App', current: false, icon: '' }
+          },
+          {
+            name: 'android',
+            path: '#',
+            meta: { title: 'Android App', current: false, icon: '' }
+          },
+          {
+            name: 'customer',
+            path: '#',
+            meta: { title: 'New Customer Portal', current: false, icon: 'Home' },
+            children: [
+              {
+                name: 'GraphQL API',
+                path: '#',
+                meta: { title: 'GraphQL API', current: false, icon: '' }
+              },
+              {
+                name: 'iOS',
+                path: '#',
+                meta: { title: 'iOS App', current: false, icon: '' }
+              },
+              {
+                name: 'android',
+                path: '#',
+                meta: { title: 'Android App', current: false, icon: '' }
+              },
+              {
+                name: 'customer',
+                path: '#',
+                meta: { title: 'New Customer Portal', current: false, icon: '' }
+              }
+            ]
+          }
+        ]
       },
       {
         name: 'iOS',
-        path: '',
+        path: '#',
         meta: { title: 'iOS App', current: false, icon: '' }
       },
       {
         name: 'android',
-        path: '',
+        path: '#',
         meta: { title: 'Android App', current: false, icon: '' }
       },
       {
         name: 'customer',
-        path: '',
+        path: '#',
         meta: { title: 'New Customer Portal', current: false, icon: '' }
       }
     ]
   },
   {
     name: 'Calendar',
-    path: '',
+    path: '#',
     meta: { title: 'Calendar', current: false, icon: '' }
   },
   {
     name: 'Documents',
-    path: '',
+    path: '#',
     meta: { title: 'Documents', current: false, icon: '' }
   },
   {
     name: 'Reports',
-    path: '',
+    path: '#',
     meta: { title: 'Reports', current: false, icon: '' }
   }
 ])

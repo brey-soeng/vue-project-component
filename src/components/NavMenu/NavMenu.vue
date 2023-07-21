@@ -3,16 +3,7 @@
     <nav class="flex flex-1 flex-col">
       <ul role="list" class="flex flex-1 flex-col">
         <li>
-          <ul role="list" class="space-y-1">
-            <NavMenuItem
-              v-for="(items, _index) in navigation"
-              :items="items"
-              :key="items?.name"
-              :indent="indent"
-              :index="_index"
-              @click="handleNavItem(items)"
-            />
-          </ul>
+          <NavMenuItem :items="navigation" :indent="indent" />
         </li>
       </ul>
     </nav>
@@ -36,10 +27,5 @@ const props = defineProps({
 watch(props.menuList, (value) => {
   navigation.value = value
 })
-const emit = defineEmits(['click'])
-const handleNavItem = (items) => {
-  emit('click', items)
-}
-
 const navigation = ref(props.menuList)
 </script>

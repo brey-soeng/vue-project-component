@@ -5,7 +5,7 @@
         @click="handleClick"
         v-click-outside="handleClickOutside"
         v-ripple
-        class="ripple-class"
+        class="ripple-class rounded-full"
       >
         <div
           class="p-2 flex justify-center items-center rounded-full text-default-500 dark:text-default-300 hover:dark:bg-primary-800 hover:dark:text-primary-500 hover:text-primary-500 hover:dark:bg-opacity-10 hover:bg-primary-800 hover:bg-opacity-10"

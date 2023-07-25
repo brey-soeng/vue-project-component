@@ -11,6 +11,6 @@ import { onMounted } from 'vue'
 
 onMounted(() => {})
 const handleNotification = () => {
-  this.$toast('some words')
+  this.$notify('This is a success notification.', 'success')
 }
 </script>

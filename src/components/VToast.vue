@@ -1,23 +1,21 @@
 <template>
-  <transition :enter-active-class="transition.enter" :leave-active-class="transition.leave">
-    <div
-      v-show="isActive"
-      :class="['c-toast', `c-toast--${props.type}`, `c-toast--${props.position}`]"
-      @mouseover="toggleTimer(true)"
-      @mouseleave="toggleTimer(false)"
-      @click="click"
-      role="alert"
-      v-html="props.message"
-    />
-  </transition>
+  <div
+    :class="style + shade + animation"
+    @click="click"
+    @mouseover="toggleTimer(true)"
+    @mouseleave="toggleTimer(false)"
+    role="alert"
+  >
+    <div class="px-4 py-4 flex justify-between items-start text-lg">
+      {{ message }}
+    </div>
+  </div>
 </template>
-
 <script setup>
-import removeElement from '@/plugin/notification/component'
 import Timer from '@/plugin/notification/timer'
-import Positions, { definePosition } from '@/plugin/notification/position'
-import eventBus from '@/plugin/notification/event'
-import { computed, onBeforeMount, onBeforeUnmount, onMounted, ref } from 'vue'
+import events from '@/plugin/notification/event'
+import elements from '@/plugin/notification/component'
+import { ref, computed, onBeforeMount, onBeforeUnmount, onMounted } from 'vue'
 const props = defineProps({
   message: {
     type: String,
@@ -27,159 +25,152 @@ const props = defineProps({
     type: String,
     default: 'default'
   },
-  position: {
-    type: String,
-    default: Positions.BOTTOM_RIGHT,
-    validator(value) {
-      return Object.values(Positions).includes(value)
-    }
+  delay: {
+    type: Number,
+    default: 4000
   },
   maxToasts: {
     type: [Number, Boolean],
-    default: false
-  },
-  duration: {
-    type: [Number, Boolean],
-    default: 4000
-  },
-  dismissible: {
-    type: Boolean,
-    default: true
-  },
-  queue: {
-    type: Boolean,
-    default: false
-  },
-  pauseOnHover: {
-    type: Boolean,
-    default: true
-  },
-  useDefaultCss: {
-    type: Boolean,
-    default: true
-  },
-  onClose: {
-    type: Function,
-    default: () => {}
-  },
-  onClick: {
-    type: Function,
-    default: () => {}
+    default: 5
   }
 })
 
-const isActive = ref(false)
-const parentTop = ref(null)
-const parentBottom = ref(null)
-const timer = ref(null)
-const queueTimer = ref(null)
-onMounted(() => {
-  showNotice()
-  eventBus.$on('toast-clear', this.close)
+const state = ref({
+  parent: null,
+  timer: null,
+  queueTimer: null,
+  transition: 'toast-in'
 })
+
+const animation = computed(() => {
+  return ' animation-' + state.value.transition
+})
+
+const style = computed(() => {
+  return 'flex self-end overflow-hidden rounded-xl cursor-pointer shadow-xl mb-5 pointer-events-auto'
+})
+const shade = computed(() => {
+  switch (props.type) {
+    case 'info':
+      return ' bg-blue-500 border-2 border-blue-600 text-white'
+    case 'warning':
+      return ' bg-orange-600 border-2 border-orange-600 text-white'
+    case 'success':
+      return ' bg-green-600 border-2 border-green-600 text-white'
+    case 'error':
+      return ' bg-red-500 border-2 border-red-600 text-white'
+    default:
+      return ' bg-gray-50 border-2 border-gray-200'
+  }
+})
+onMounted(() => {
+  notify()
+  events.$on('toast-clean', close)
+})
+
 onBeforeMount(() => {
-  createParents()
-  setDefaultCss()
+  createParent()
   setupContainer()
 })
 
 onBeforeUnmount(() => {
-  eventBus.$off('toast-clear', this.close)
+  events.$off('toast-clear', close)
 })
 
-const correctParent = computed(() => {
-  return definePosition(props.position, parentTop.value, parentBottom.value)
-})
-
-const transition = computed(() => {
-  return definePosition(
-    props.position,
-    {
-      enter: 'fadeInDown',
-      leave: 'fadeOut'
-    },
-    {
-      enter: 'fadeInUp',
-      leave: 'fadeOut'
-    }
-  )
-})
-
-const createParents = () => {
-  parentTop.value = document.querySelector('.c-toast-container--top')
-  parentBottom.value = document.querySelector('.c-toast-container--bottom')
-
-  if (parentTop.value && parentBottom.value) return
-
-  if (!parentTop.value) {
-    parentTop.value = document.createElement('div')
-    parentTop.value.className = 'c-toast-container c-toast-container--top'
+const createParent = () => {
+  state.value.parent = document.getElementById('_toast_container')
+  if (!state.value.parent) {
+    state.value.parent = document.createElement('div')
+    state.value.parent.id = '_toast_container'
+    state.value.parent.className =
+      'fixed flex flex-col-reverse w-full h-full inset-0 p-10 z-50 pointer-events-none overflow-hidden'
   }
-
-  if (!parentBottom.value) {
-    parentBottom.value = document.createElement('div')
-    parentBottom.value.className = 'c-toast-container c-toast-container--bottom'
-  }
-}
-const setDefaultCss = () => {
-  const type = props.useDefaultCss ? 'add' : 'remove'
-  parentTop.value.classList[type]('v--default-css')
-  parentBottom.value.classList[type]('v--default-css')
 }
 const setupContainer = () => {
   const container = document.body
-  container.appendChild(parentTop.value)
-  container.appendChild(parentBottom.value)
+  container.appendChild(state.value.parent)
 }
-const shouldQueue = () => {
-  if (!props.queue && props.maxToasts === false) {
-    return false
-  }
-
+const shouldNotify = () => {
   if (props.maxToasts !== false) {
-    return (
-      props.maxToasts <= parentTop.value.childElementCount + parentBottom.value.childElementCount
-    )
+    return props.maxToasts <= state.value.parent.childElementCount
   }
 
-  return parentTop.value.childElementCount > 0 || parentBottom.value.childElementCount > 0
+  return !props.maxToasts
 }
-const showNotice = () => {
-  if (shouldQueue()) {
-    queueTimer.value = setTimeout(showNotice(), 250)
+const notify = () => {
+  if (shouldNotify()) {
+    state.value.queueTimer = setTimeout(notify, 250)
     return
   }
 
-  correctParent.value.insertAdjacentElement('afterbegin', this.$el)
-  isActive.value = true
-
-  timer.value = props.duration !== false ? new Timer(close(), props.duration) : null
+  state.value.parent.insertAdjacentElement('afterbegin', this.$el)
+  state.value.timer = new Timer(close, props.delay)
 }
 const click = () => {
-  // eslint-disable-next-line no-undef
-  props.onClick.apply(null, arguments)
-
-  if (props.dismissible) {
-    close()
+  close()
+}
+const toggleTimer = (state) => {
+  if (state.value.timer) {
+    state ? state.value.timer.pause() : state.value.timer.resume()
   }
 }
-const toggleTimer = (newVal) => {
-  if (timer.value && props.pauseOnHover) {
-    newVal ? timer.value.pause() : timer.value.resume()
-  }
-}
-const stopTimer = () => {
-  timer.value && timer.value.stop()
-  clearTimeout(queueTimer.value)
-}
-
 const close = () => {
-  stopTimer()
-  isActive.value = false
+  state.value.timer && state.value.timer.stop()
+  clearTimeout(state.value.queueTimer)
+  state.value.transition = 'toast-out'
+
   setTimeout(() => {
-    // eslint-disable-next-line no-undef
-    props.onClose.apply(null, arguments)
-    removeElement(this.$el)
-  }, 150)
+    elements.removeElement(this.$el)
+  }, 250)
 }
 </script>
+
+<style>
+.animation-toast-in {
+  -webkit-animation: slide-top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: slide-top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animation-toast-out {
+  -webkit-animation: fade-out 0.2s ease-out both;
+  animation: fade-out 0.2s ease-out both;
+}
+
+@-webkit-keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(60px);
+    transform: translateY(60px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(60px);
+    transform: translateY(60px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+</style>

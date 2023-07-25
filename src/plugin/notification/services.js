@@ -1,17 +1,13 @@
 import toast from '@/components/VToast.vue'
-import eventBus from './event'
-import mount from './component'
+import elements from '@/plugin/notification/component'
+import events from '@/plugin/notification/event'
+
 const service = (globalOptions = {}) => {
   return {
     show(message, options = {}) {
-      let localOptions = { message, ...options }
-      const c = mount(toast, {
-        props: { ...globalOptions, ...localOptions }
+      return elements.mountElement(toast, {
+        props: { ...globalOptions, ...{ message, ...options } }
       })
-      return c
-    },
-    clear() {
-      eventBus.$emit('toast-clear')
     },
     success(message, options = {}) {
       options.type = 'success'
@@ -28,6 +24,9 @@ const service = (globalOptions = {}) => {
     warning(message, options = {}) {
       options.type = 'warning'
       return this.show(message, options)
+    },
+    clear() {
+      events.$emit('toast-clear')
     }
   }
 }

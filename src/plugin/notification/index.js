@@ -1,10 +1,11 @@
+import notify from '@/components/VToast.vue'
 import service from './services'
-const args = {}
 
-const toast = (app) => {
-  const methods = service(args)
-  app.$toast = methods
-  app.config.globalProperties.$toast = methods
+notify.install = (app, options = {}) => {
+  let plugin = service(options)
+  app.$notify = plugin
+  app.config.globalProperties.$notify = plugin
 }
 
-export default { toast, service }
+export default notify
+export { notify, service }

@@ -1,8 +1,16 @@
 import { render, h } from 'vue'
 
+const removeElement = (el) => {
+  if (typeof el.remove !== 'undefined') {
+    el.remove()
+  } else {
+    el.parentNode.removeChild(el)
+  }
+}
+
 const createElement = () => typeof document !== 'undefined' && document.createElement('div')
 
-const mount = (component, { props, children, element, app } = {}) => {
+const mountElement = (component, { props, children, element, app } = {}) => {
   let el = element ? element : createElement()
 
   let vNode = h(component, props, children)
@@ -23,12 +31,4 @@ const mount = (component, { props, children, element, app } = {}) => {
   return { vNode, destroy, el }
 }
 
-const removeElement = (el) => {
-  if (typeof el.remove !== 'undefined') {
-    el.remove()
-  } else {
-    el.parentNode.removeChild(el)
-  }
-}
-
-export default { createElement, removeElement, mount }
+export default { createElement, removeElement, mountElement }

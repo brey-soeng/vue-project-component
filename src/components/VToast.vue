@@ -78,10 +78,10 @@ onBeforeUnmount(() => {
 })
 
 const createParent = () => {
-  state.value.parent = document.getElementById('_toast_container')
+  state.value.parent = document.getElementById('elementId')
   if (!state.value.parent) {
     state.value.parent = document.createElement('div')
-    state.value.parent.id = '_toast_container'
+    state.value.parent.id = 'elementId'
     state.value.parent.className =
       'fixed flex flex-col-reverse w-full h-full inset-0 p-10 z-50 pointer-events-none overflow-hidden'
   }

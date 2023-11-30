@@ -1,30 +1,31 @@
 import { createApp } from 'vue'
-import GlobalNotification from '../components/GlobalNotification.vue'
+import Notification from '../components/GlobalNotification.vue'
+export default {
+  install: (app) => {
+    const defaultOption = {}
+    const notifyEle = {
+      instance: null,
+      option: {},
+      show(option) {
+        const _option = { ...defaultOption, ...option }
+        // Create a new div element to mount the GlobalNotification component
+        const notifyContainer = document.createElement('div')
+        document.body.appendChild(notifyContainer)
 
-const NotifyPlugin = {
-  install(app) {
-    // Create a new div element to mount the GlobalNotification component
-    const notifyContainer = document.createElement('div')
-    document.body.appendChild(notifyContainer)
-
-    // Mount the GlobalNotification component to the new element
-    const vm = createApp(GlobalNotification)
-    const notificationComponent = vm.mount(notifyContainer)
-
-    // Create a show method on the Vue instance to trigger the notification
-    app.config.globalProperties.$notify = {
-      show(message, type = 'info', direct = true, position = 'top', duration = 3000) {
-        notificationComponent.message = message
-        notificationComponent.type = type
-        notificationComponent.direct = direct
-        notificationComponent.position = position
-        notificationComponent.duration = duration
-        notificationComponent.show = true
+        // Mount the GlobalNotification component to the new element
+        this.instance = createApp({ extends: Notification }, { ..._option })
+        if (!this.instance) return
+        this.instance.mount(notifyContainer)
+        this.instance.title = _option.title
+        this.instance.message = _option.message
+        this.instance.direct = _option.direct
+        this.instance.position = _option.position
+        this.instance.duration = _option.duration
+        this.instance.type = _option.type
+        this.instance.id = _option.id
       }
     }
-
-    console.log(app.config.globalProperties.$notify)
+    app.provide('notify', notifyEle)
+    app.config.globalProperties.$notify = notifyEle
   }
 }
-
-export default NotifyPlugin

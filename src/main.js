@@ -5,10 +5,8 @@ import i18n from './lang'
 import '@/styles/style.css'
 import './beforeRouterPermission'
 import directives from './directives'
-
-import mitt from 'mitt'
-const emitter = mitt()
-app.config.globalProperties.emitter = emitter
+import NotifyPlugin from './plugin/notify'
+import ToastPlugin from './plugin/notification'
 
 directives(app)
 
@@ -16,4 +14,6 @@ app.use(createPinia())
 
 app.use(router)
 app.use(i18n)
+app.use(NotifyPlugin)
+app.use(ToastPlugin)
 app.mount('#app')

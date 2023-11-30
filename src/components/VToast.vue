@@ -7,121 +7,123 @@
     role="alert"
   >
     <div class="px-4 py-4 flex justify-between items-start text-lg">
-      {{ message }}
+      {{ message.title }}
     </div>
   </div>
 </template>
-<script setup>
+<script>
 import Timer from '@/plugin/notification/timer'
 import events from '@/plugin/notification/event'
 import elements from '@/plugin/notification/component'
-import { ref, computed, onBeforeMount, onBeforeUnmount, onMounted } from 'vue'
-const props = defineProps({
-  message: {
-    type: String,
-    required: true
+export default {
+  props: {
+    message: {
+      type: [String, Object],
+      required: true
+    },
+    type: {
+      type: String,
+      default: 'default'
+    },
+    delay: {
+      type: Number,
+      default: 4000
+    },
+    maxToasts: {
+      type: [Number, Boolean],
+      default: 5
+    }
   },
-  type: {
-    type: String,
-    default: 'default'
+  computed: {
+    animation() {
+      return 'animation-' + this.state.transition
+    },
+    style() {
+      return 'flex self-end overflow-hidden rounded-xl cursor-pointer shadow-xl mb-5 pointer-events-auto'
+    },
+    shade() {
+      switch (this.type) {
+        case 'info':
+          return ' bg-blue-500 border-2 border-blue-600 text-white'
+        case 'warning':
+          return ' bg-orange-600 border-2 border-orange-600 text-white'
+        case 'success':
+          return ' bg-green-600 border-2 border-green-600 text-white'
+        case 'error':
+          return ' bg-red-500 border-2 border-red-600 text-white'
+        default:
+          return ' bg-gray-50 border-2 border-gray-200'
+      }
+    }
   },
-  delay: {
-    type: Number,
-    default: 4000
+  mounted() {
+    this.notify()
+    events.$on('toast-clean', close)
   },
-  maxToasts: {
-    type: [Number, Boolean],
-    default: 5
+  data() {
+    return {
+      state: {
+        parent: null,
+        timer: null,
+        queueTimer: null,
+        transition: 'toast-in'
+      }
+    }
+  },
+  beforeMount() {
+    this.createParent()
+    this.setupContainer()
+  },
+  beforeUnmount() {
+    events.$off('toast-clear', close)
+  },
+  methods: {
+    createParent() {
+      this.state.parent = document.getElementById('elementId')
+      if (!this.state.parent) {
+        this.state.parent = document.createElement('div')
+        this.state.parent.id = 'elementId'
+        this.state.parent.className =
+          'fixed flex flex-col-reverse w-full h-full inset-0 p-10 z-50 pointer-events-none overflow-hidden'
+      }
+    },
+    setupContainer() {
+      const container = document.body
+      container.appendChild(this.state.parent)
+    },
+    shouldNotify() {
+      if (this.maxToasts !== false) {
+        return this.maxToasts <= this.state.parent.childElementCount
+      }
+
+      return !this.maxToasts
+    },
+    notify() {
+      if (this.shouldNotify()) {
+        this.state.queueTimer = setTimeout(this.notify, 250)
+        return
+      }
+
+      this.state.parent.insertAdjacentElement('afterbegin', this.$el)
+      this.state.timer = new Timer(close, this.delay)
+    },
+    click() {
+      close()
+    },
+    toggleTimer(state) {
+      if (state.timer) {
+        state ? state.timer.pause() : state.timer.resume()
+      }
+    },
+    close() {
+      this.state.timer && this.state.timer.stop()
+      clearTimeout(this.state.queueTimer)
+      this.state.transition = 'toast-out'
+      setTimeout(() => {
+        elements.removeElement(this.$el)
+      }, 250)
+    }
   }
-})
-
-const state = ref({
-  parent: null,
-  timer: null,
-  queueTimer: null,
-  transition: 'toast-in'
-})
-
-const animation = computed(() => {
-  return ' animation-' + state.value.transition
-})
-
-const style = computed(() => {
-  return 'flex self-end overflow-hidden rounded-xl cursor-pointer shadow-xl mb-5 pointer-events-auto'
-})
-const shade = computed(() => {
-  switch (props.type) {
-    case 'info':
-      return ' bg-blue-500 border-2 border-blue-600 text-white'
-    case 'warning':
-      return ' bg-orange-600 border-2 border-orange-600 text-white'
-    case 'success':
-      return ' bg-green-600 border-2 border-green-600 text-white'
-    case 'error':
-      return ' bg-red-500 border-2 border-red-600 text-white'
-    default:
-      return ' bg-gray-50 border-2 border-gray-200'
-  }
-})
-onMounted(() => {
-  notify()
-  events.$on('toast-clean', close)
-})
-
-onBeforeMount(() => {
-  createParent()
-  setupContainer()
-})
-
-onBeforeUnmount(() => {
-  events.$off('toast-clear', close)
-})
-
-const createParent = () => {
-  state.value.parent = document.getElementById('elementId')
-  if (!state.value.parent) {
-    state.value.parent = document.createElement('div')
-    state.value.parent.id = 'elementId'
-    state.value.parent.className =
-      'fixed flex flex-col-reverse w-full h-full inset-0 p-10 z-50 pointer-events-none overflow-hidden'
-  }
-}
-const setupContainer = () => {
-  const container = document.body
-  container.appendChild(state.value.parent)
-}
-const shouldNotify = () => {
-  if (props.maxToasts !== false) {
-    return props.maxToasts <= state.value.parent.childElementCount
-  }
-
-  return !props.maxToasts
-}
-const notify = () => {
-  if (shouldNotify()) {
-    state.value.queueTimer = setTimeout(notify, 250)
-    return
-  }
-
-  state.value.parent.insertAdjacentElement('afterbegin', this.$el)
-  state.value.timer = new Timer(close, props.delay)
-}
-const click = () => {
-  close()
-}
-const toggleTimer = (state) => {
-  if (state.value.timer) {
-    state ? state.value.timer.pause() : state.value.timer.resume()
-  }
-}
-const close = () => {
-  state.value.timer && state.value.timer.stop()
-  clearTimeout(state.value.queueTimer)
-  state.value.transition = 'toast-out'
-
-  setTimeout(() => {
-    elements.removeElement(this.$el)
-  }, 250)
 }
 </script>
 

@@ -1,38 +1,30 @@
 <template>
-  <div>
+  <div class="relative">
     <!-- <VNotification title="hello world" /> -->
     <button class="py-2 px-2 rounded bg-primary-500 text-white" @click="handleNotification">
       Notification
     </button>
-
-    <GlobalNotification
-      v-if="showNotification"
-      :message="notificationMessage"
-      :type="notificationType"
-      :direct="false"
-      position="top"
-      :duration="3000"
-    />
   </div>
 </template>
 <script setup>
-import { onMounted, ref } from 'vue'
-const showNotification = ref(false)
-const notificationMessage = ref('Hello, this is a notification!')
-const notificationType = ref('success')
-
-onMounted(() => {
-  this.emitter.on('my-event', {
-    showNotification: true,
-    notificationMessage: notificationMessage.value,
-    notificationType: notificationType.value
-  })
-})
+import { onMounted, inject } from 'vue'
+const notify = inject('notify')
+// const toast = inject('toast')
+onMounted(() => {})
 const handleNotification = () => {
-  this.emitter.emit('my-event', {
-    showNotification: true,
-    notificationMessage: notificationMessage.value,
-    notificationType: notificationType.value
+  // toast.show({
+  //   message: 'Hello world',
+  //   type: 'success',
+  //   title: 'testing'
+  // })
+  // console.log(toast)
+  notify.show({
+    type: 'success',
+    title: 'Testing',
+    message: `This discovery successfully updated`,
+    duration: 3000,
+    direct: true,
+    position: 'top'
   })
 }
 </script>

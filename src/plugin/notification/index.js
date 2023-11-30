@@ -1,10 +1,9 @@
 import service from './services'
-const NotifyPlugin = {
-  install(app, options = {}) {
+export default {
+  install: (app, options = {}) => {
     let plugin = service(options)
-    app.$notify = plugin
-    app.config.globalProperties.$notify = plugin
+    app.$toast = plugin
+    app.provide('toast', plugin)
+    app.config.globalProperties.$toast = plugin
   }
 }
-console.log(NotifyPlugin)
-export default NotifyPlugin

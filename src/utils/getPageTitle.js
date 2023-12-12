@@ -1,6 +1,6 @@
 import defaultSettings from '@/settings'
 
-const title = defaultSettings.title || 'DevWithMe'
+const title = defaultSettings.title || 'Dashboard'
 
 export default function getPageTitle(pageTitle) {
   if (pageTitle) {

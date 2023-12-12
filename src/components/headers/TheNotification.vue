@@ -13,7 +13,7 @@
           <BellIcon class="h-6 w-6 text-gray-400" aria-hidden="true" />
           <span
             class="absolute flex justify-center items-center top-1 right-1 bg-danger-500 rounded-full text-white z-30 w-[18px] h-[18px] p-[2px] text-[8px]"
-            >99</span
+            >99+</span
           >
         </div>
       </button>

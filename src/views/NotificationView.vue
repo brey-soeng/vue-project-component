@@ -7,24 +7,32 @@
   </div>
 </template>
 <script setup>
-import { onMounted, inject } from 'vue'
+import { onMounted, inject, ref } from 'vue'
 const notify = inject('notify')
-// const toast = inject('toast')
+const isLoading = ref(false)
+
 onMounted(() => {})
 const handleNotification = () => {
-  // toast.show({
-  //   message: 'Hello world',
-  //   type: 'success',
-  //   title: 'testing'
-  // })
-  // console.log(toast)
   notify.show({
     type: 'success',
-    title: 'Testing',
+    title: 'Save Success!',
     message: `This discovery successfully updated`,
     duration: 3000,
-    direct: true,
-    position: 'top'
+    position: 'top',
+    isDismiss: true,
+    btn_label_2: 'confirm',
+    btn_label_1: 'cancel',
+    loading: isLoading,
+    onUndo: handleUndo,
+    onConfirm: handleConfirm
   })
+}
+const handleUndo = () => {
+  isLoading.value = true
+  console.log('Hello undo')
+}
+const handleConfirm = () => {
+  isLoading.value = true
+  console.log('hello confirm')
 }
 </script>

@@ -6,7 +6,6 @@ module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     colors: {
-      // dark: colors.sky,
       white: colors.white,
       default: colors.gray,
       primary: colors.cyan,
@@ -14,7 +13,7 @@ module.exports = {
       neutral: colors.teal,
       warning: colors.orange,
       danger: colors.red,
-      success: colors.green,
+      success: colors.emerald,
       main: '#f0f2f5',
       dark: '#2f3349'
     },

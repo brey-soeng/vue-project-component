@@ -1,5 +1,5 @@
 const defaultSetting = {
-  title: 'Dev Admin'
+  title: 'Dashboard'
 }
 
 export default defaultSetting
